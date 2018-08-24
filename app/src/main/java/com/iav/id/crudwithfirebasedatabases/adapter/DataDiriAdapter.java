@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.iav.id.crudwithfirebasedatabases.R;
@@ -56,26 +57,29 @@ public class DataDiriAdapter extends RecyclerView.Adapter<DataDiriAdapter.ViewHo
         cvklik.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                DataDiriModel dataDiriModel = null;
                 final Dialog dialog = new Dialog(context);
                 dialog.setContentView(R.layout.dialog_rfit);
                 dialog.setTitle("Pilih Aksi");
                 Button btnEdit = dialog.findViewById(R.id.btn_edit);
                 EditText edtEditNama = dialog.findViewById(R.id.edt_nama_edit);
                 EditText edtEditAlamat = dialog.findViewById(R.id.edt_alamat_edit);
-
-
                 databaseReference = FirebaseDatabase.getInstance().getReference();
-                databaseReference.child("barang")// akses parrent nya paling ataas
-                .child(dataDiriModel.getKey())
-                        .setValue(new DataDiriModel(edtEditNama.getText().toString().trim(), edtEditAlamat.getText().toString().trim()))
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
+                DataSnapshot dataSnapshot = null;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    DataDiriModel dataDiriModel = snapshot.getValue(DataDiriModel.class);
+                    dataDiriModel.setKey(dataSnapshot.getKey());
 
-                            }
-                        });
+                    databaseReference.child("barang")// akses parrent nya paling ataas
+                            .child(dataDiriModel.getKey())
+                            .setValue(new DataDiriModel(edtEditNama.getText().toString().trim(), edtEditAlamat.getText().toString().trim()))
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
 
+                                }
+                            });
+
+                }
                 dialog.show();
 
                 return true;
