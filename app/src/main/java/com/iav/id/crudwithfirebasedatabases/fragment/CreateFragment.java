@@ -11,11 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.iav.id.crudwithfirebasedatabases.R;
 import com.iav.id.crudwithfirebasedatabases.model.DataDiriModel;
+
+import io.fabric.sdk.android.Fabric;
 
 
 /**
@@ -42,11 +45,16 @@ public class CreateFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_create, container, false);
         initView(view);
-
+        final Fabric fabric = new Fabric.Builder(getActivity())
+                .kits(new Crashlytics())
+                .debuggable(true)           // Enables Crashlytics debugger
+                .build();
+        Fabric.with(fabric);
         databaseReference = FirebaseDatabase.getInstance().getReference();
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Crashlytics.getInstance().crash(); // Force a crash
                 uid = databaseReference.push().getKey();
                 Log.d("", "onCreateView: " + uid);
                 Toast.makeText(getActivity(), "" + uid, Toast.LENGTH_SHORT).show();
