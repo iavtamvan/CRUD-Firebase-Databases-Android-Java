@@ -50,15 +50,27 @@ public class CreateFragment extends Fragment {
                 .debuggable(true)           // Enables Crashlytics debugger
                 .build();
         Fabric.with(fabric);
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("data_diri"); // Nama table
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Crashlytics.getInstance().crash(); // Force a crash
                 uid = databaseReference.push().getKey();
                 Log.d("", "onCreateView: " + uid);
                 Toast.makeText(getActivity(), "" + uid, Toast.LENGTH_SHORT).show();
-                databaseReference.child("data_diri").push().setValue(new DataDiriModel(edtNama.getText().toString().trim(), edtAlamat.getText().toString().trim()))
+                // push = ID key Firebasenya
+                // child 1 = baris 1 yang dibuat untuk update data dll
+                databaseReference
+                        .child("iav") // array 1
+                        .child("iav") // array 2
+                        .child("iav") // array 3
+                        .child("iav") // array 4
+                        .child("iav") // array 5
+                        .child("iav") // array 6
+                        .child("iav") // array 7
+                        .child("iav") // array 8
+                        .child(uid) // object 1 = yang dimaksud 1 object ada 1 glondongan data.
+                        .setValue(new DataDiriModel(edtNama.getText().toString().trim(), edtAlamat.getText().toString().trim(), uid))
                         .addOnSuccessListener(getActivity(), new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {

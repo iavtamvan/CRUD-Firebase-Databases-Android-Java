@@ -48,17 +48,27 @@ public class ReadFragment extends Fragment {
 
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        databaseReference.child("data_diri").addValueEventListener(new ValueEventListener() {
+        dataDiriModels.clear();
+        databaseReference.child("data_diri")
+                .child("iav")
+                .child("iav")
+                .child("iav")
+                .child("iav")
+                .child("iav")
+                .child("iav")
+                .child("iav")
+                .child("iav")
+                .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     DataDiriModel dataDiriModel = snapshot.getValue(DataDiriModel.class);
-                    dataDiriModel.setKey(dataSnapshot.getKey());
+//                    dataDiriModel.setIdKey(dataSnapshot.getKey());
                     dataDiriModels.add(dataDiriModel);
                 }
                 dataDiriAdapter = new DataDiriAdapter(dataDiriModels, getActivity());
+                dataDiriAdapter.notifyDataSetChanged();
                 rv.setAdapter(dataDiriAdapter);
 
             }
@@ -72,6 +82,12 @@ public class ReadFragment extends Fragment {
 
 
         return view;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        dataDiriModels.clear();
     }
 
     private void initView(View view) {

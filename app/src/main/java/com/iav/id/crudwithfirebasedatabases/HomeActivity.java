@@ -49,6 +49,10 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.div_container, new CreateFragment()).commit();
+        getSupportActionBar().setTitle("Create");
     }
 
     @Override

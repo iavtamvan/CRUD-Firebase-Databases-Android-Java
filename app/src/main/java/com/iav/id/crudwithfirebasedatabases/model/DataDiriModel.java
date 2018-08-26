@@ -3,23 +3,24 @@ package com.iav.id.crudwithfirebasedatabases.model;
 public class DataDiriModel {
     String nama;
     String alamat;
-    String key;
+    String idKey;
 
 
     public DataDiriModel() {
     }
 
-    public DataDiriModel(String nama, String alamat) {
+    public DataDiriModel(String nama, String alamat, String idKey) {
         this.nama = nama;
         this.alamat = alamat;
+        this.idKey = idKey;
     }
 
-    public String getKey() {
-        return key;
+    public String getIdKey() {
+        return idKey;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setIdKey(String idKey) {
+        this.idKey = idKey;
     }
 
     public String getNama() {
