@@ -29,9 +29,15 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    implementation 'com.google.firebase:firebase-database:11.6.0'
     implementation 'com.android.support:cardview-v7:26.+'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
 
+
+
+    implementation 'com.google.firebase:firebase-database:11.6.0'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.5'
+    implementation 'com.google.firebase:firebase-storage:16.0.1'
+    implementation 'com.firebaseui:firebase-ui-storage:0.6.0' // untuk menampilkan gambar
 }
 apply plugin: 'com.google.gms.google-services'
